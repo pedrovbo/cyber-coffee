@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+	<meta charset="UTF-8" />
+</head>
+
+<body>
+
+	<div layout:fragment="corpo">
+
+		<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+
+		<div class="card">
+
+			<div class="card-body">
+				<form method="POST" th:object=${elementoreceita} th:action="@{'/elemento_receita/editar/'+ ${receita.id}}">
+					<input type="hidden" th:field="*{id}">
+
+					<div class="form-group text-center">
+
+						<label for="quantidades">Quantidade</label>
+						<select name="quantidade" id="quantidades" th:field="*{quantidade}">
+							<option th:each="i : ${lista_quantidade}" th:value="${i}" th:text="${i}"></option>
+						</select>
+
+						<label for="medidas">Unidade de Medida</label>
+						<select name="medida" id="medidas" th:field="*{unidadeMedida}">
+							<option th:each="i : ${lista_unidade_medida}" th:value="${i.id}" th:text="${i.nome}"></option>
+						</select>
+
+						<label for="ingredientes">Ingrediente</label>
+						<select name="ingrediente" id="ingredientes" th:field="*{ingrediente}">
+							<option th:each="i : ${lista_ingrediente}" th:value="${i.id}" th:text="${i.nome}"></option>
+						</select>
+
+						<button type="submit" class="btn btn-primary">Adicionar</button>
+
+					</div>
+
+
+
+				</form>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</body>
+
+</html>

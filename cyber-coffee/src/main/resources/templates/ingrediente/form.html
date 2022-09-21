@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+	<meta charset="UTF-8" />
+</head>
+
+<body>
+
+	<div layout:fragment="corpo">
+
+		<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+
+		<div class="card">
+
+			<div class="card-header">
+				<p class="text-primary">Novo Ingrediente</p>
+			</div>
+
+			<div class="card-body">
+				<form method="POST" th:object=${ingrediente} th:action="@{/ingrediente/editar}">
+					<input type="hidden" th:field="*{id}">
+
+					<div class="form-group mb-3">
+						<label for="nome">Nome do Ingrediente:</label> <input class="form-control" type="text"
+							th:field="*{nome}" required>
+
+						<div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+					</div>
+
+					<button type="submit" class="btn btn-success btn-block mb-4">Salvar Ingrediente</button>
+
+				</form>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</body>
+
+</html>

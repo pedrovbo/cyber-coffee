@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+	<div layout:fragment="corpo">
+
+		<!-- TODO fazer upload de imagem da nova receita -->
+		<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+
+		<div class="card">
+			<div class="card-header">
+				<p class="text-primary">Nova Receita</p>
+			</div>
+
+			<!-- Formulário da Receita -->
+			<div class="card-body">
+				<form method="POST" th:object=${receita} th:action="@{/receita/editar}">
+					<input type="hidden" th:field="*{id}">
+
+					<div class="form-group mb-3">
+						<label for="nome">Nome da Receita:</label> <input class="form-control" type="text"
+							th:field="*{nome}" required>
+						<div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+					</div>
+
+					<div class="form-group mb-3">
+						<label for="tempoPreparo">Tempo de Preparo:</label> <input class="form-control" type="number"
+							th:field="*{tempoPreparo}" required>
+						<div class="text-danger" th:if="${#fields.hasErrors('tempoPreparo')}"
+							th:errors="*{tempoPreparo}"></div>
+					</div>
+
+					<div class="form-group mb-3">
+						<label for="modoPreparo">Modo de Preparo:</label> <textarea class="form-control" id="modo"
+							rows="5" th:field="*{modoPreparo}" required></textarea>
+						<div class="text-danger" th:if="${#fields.hasErrors('modoPreparo')}" th:errors="*{modoPreparo}">
+						</div>
+					</div>
+
+					<div class="form-group mb-3">
+						<label for="rendimento">Rendimento:</label> <input class="form-control" type="number"
+							th:field="*{rendimento}" required>
+						<div class="text-danger" th:if="${#fields.hasErrors('rendimento')}" th:errors="*{rendimento}">
+						</div>
+					</div>
+
+					<div>
+						<button type="submit" class="btn btn-success btn-block mb-4">Salvar Receita</button>
+						<!-- TODO aqui -->
+						<a class="btn btn-dark btn-block mb-4"  th:href="@{'/elemento_receita/'+ ${receita.id}}">Ingredientes </a>
+					</div>
+				</form>
+
+				<div>
+
+
+				</div>
+
+				<div class="card-body">
+					<table class="table table-striped">
+						<caption hidden> Elementos da Receita</caption>
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Quantidade</th>
+								<th>Unidade de Medida</th>
+								<th>Ingrediente</th>
+							</tr>
+
+						</thead>
+
+						<tbody>
+
+							<tr th:each="item : ${elementosreceita}">
+
+								<td th:text="${item.id}"></td>
+								<td th:text="${item.quantidade}"></td>
+								<td th:text="${item.unidadeMedida}"></td>
+								<td th:text="${item.ingrediente}"></td>
+
+
+							</tr>
+
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+
+</body>
+
+</html>

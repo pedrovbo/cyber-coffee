@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+  <meta charset="UTF-8" />
+</head>
+
+<body>
+
+  <div layout:fragment="corpo">
+
+    <div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+      Nenhum ingrediente encontrado
+    </div>
+
+    <div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+
+    <div class="card mb-3">
+
+      <div class="card-header">
+        <p class="text-primary">Filtrar Ingrediente</p>
+      </div>
+
+      <div class="card-body">
+        <form method="GET">
+
+          <div class="form-group mb-3">
+            <label for="nome">Nome do Ingrediente:</label>
+            <input class="form-control" type="text" name="nome" th:value="${nome}" />
+          </div>
+
+          <button type="submit" class="btn btn-dark btn-block mb-4">
+            Filtrar Ingrediente
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+    <div th:if="${not #lists.isEmpty(lista)}">
+
+      <table class="table table-striped">
+        <caption hidden> Tabela Ingredientes</caption>
+
+        <thead>
+
+          <tr>
+
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Opções</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr th:each="ingrediente : ${lista}">
+
+            <td th:text="${ingrediente.id}"></td>
+            <td th:text="${ingrediente.nome}"></td>
+            <td>
+              <a class="btn btn-primary btn-sm" th:href="@{/ingrediente/editar(id=${ingrediente.id})}">Editar</a>
+              <a class="btn btn-primary btn-sm" th:href="@{/ingrediente/excluir(id=${ingrediente.id})}"
+                onclick="return confirm('Você realmente deseja excluir esse ingrediente?')">Excluir</a>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layout}">
+
+<head>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+
+	<section class="layout-content" layout:fragment="corpo">
+
+		<div class="container-fluid">
+
+
+
+			
+
+
+
+			<div class="row row-cols-1 row-cols-md-4 g-4">
+
+				<div id="css-cards" class="col" th:each=" receita : ${receitas}">
+					<div class="card">
+						<img id="cards-images" th:src="@{'/imgs/' + *{receita.imagem}}" class="card-img-top"
+							alt="Foto da Receita">
+						<div id="css-cards" class="card-body">
+							<h5 id="css-card-title" class="card-title" th:text="${receita.nome}">Card title</h5>
+						</div>
+						<a type="button" th:href="@{/imagens/(id=${receita.id})}" class="btn btn-dark">Detalhes</a>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+	</section>
+
+</body>
+
+</html>

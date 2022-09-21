@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+  <meta charset="UTF-8" />
+</head>
+
+<body>
+
+  <div layout:fragment="corpo">
+
+    <div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+      Nenhuma receita encontrada
+    </div>
+
+    <div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+
+    <div class="card mb-3">
+      <div class="card-header">
+        <p class="text-primary">Filtrar Receita</p>
+      </div>
+
+      <div class="card-body">
+        <form method="GET">
+
+          <div class="form-group mb-3">
+            <label for="nome">Nome da Receita:</label>
+            <input class="form-control" type="text" name="nome" th:value="${nome}" />
+          </div>
+
+          <button type="submit" class="btn btn-dark btn-block mb-4">
+            Buscar por Nome
+          </button>
+
+        </form>
+      </div>
+
+      <div class="card-body">
+        <form method="GET">
+
+          <div class="form-group mb-3">
+            <label for="nome">Nome do Ingrediente:</label>
+            <input class="form-control" type="text" name="nome" th:value="${nome}" />
+          </div>
+
+          <button type="submit" class="btn btn-dark btn-block mb-4">
+            Buscar por Ingrediente
+          </button>
+
+        </form>
+      </div>
+
+    </div>
+
+    <div th:if="${not #lists.isEmpty(lista)}">
+      <table class="table table-striped">
+        <caption hidden> Tabela Unidades de Receita</caption>
+        <thead>
+
+          <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <!-- <th>Tempo de Preparo</th>
+            <th>Modo de Preparo</th>
+            <th>Rendimento</th>            
+            <th>Itens Receita</th> -->
+            <th>Opções</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr th:each="receita : ${lista}">
+
+            <td th:text="${receita.id}"></td>
+            <td th:text="${receita.nome}"></td>
+            <!-- <td th:text="${receita.tempoPreparo}"></td>
+            <td th:text="${receita.modoPreparo}"></td>
+            <td th:text="${receita.rendimento}"></td> -->
+            <!-- <td>
+              <ul th:each="item : ${elementosreceita}">
+                <li th:text="${item}"></li>
+              </ul>
+            </td> -->
+            <td>
+
+              <a class="btn btn-primary btn-sm" th:href="@{/receita/editar(id=${receita.id})}">Editar</a>
+              <a class="btn btn-primary btn-sm" th:href="@{/receita/excluir(id=${receita.id})}"
+                onclick="return confirm('Você realmente deseja excluir essa receita?')">Excluir</a>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

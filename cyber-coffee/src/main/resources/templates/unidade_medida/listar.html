@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head><meta charset="UTF-8" /></head>
+
+<body>
+
+  <div layout:fragment="corpo">
+
+    <div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+      Nenhuma unidade de medida encontrada
+    </div>
+
+    <div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+
+    <div class="card mb-3">
+      <div class="card-header">
+        <p class="text-primary">Filtrar Unidade de Medida</p>
+      </div>
+      <div class="card-body">
+        <form method="GET">
+          <div class="form-group mb-3">
+            <label for="nome">Nome da Unidade de Medida:</label>
+            <input class="form-control" type="text" name="nome" th:value="${nome}" />
+          </div>
+          <button type="submit" class="btn btn-dark btn-block mb-4">
+            Filtrar Unidade de Medida
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div th:if="${not #lists.isEmpty(lista)}">
+      <table class="table table-striped">
+        <caption hidden> Tabela Unidades de Medida</caption>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Opções</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="unidadeMedida : ${lista}">
+            <td th:text="${unidadeMedida.id}"></td>
+            <td th:text="${unidadeMedida.nome}"></td>
+            <td>
+              <a class="btn btn-primary btn-sm" th:href="@{/unidademedida/editar(id=${unidadeMedida.id})}">Editar</a>
+              <a class="btn btn-primary btn-sm" th:href="@{/unidademedida/excluir(id=${unidadeMedida.id})}"
+                onclick="return confirm('Você realmente deseja excluir essa unidade de medida?')">Excluir</a>
+  
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+
+</html>

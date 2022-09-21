@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <section class="layout-content" layout:fragment="corpo">
+
+        <div class="container-buttons">
+
+            <div class="text-center">
+
+                <div class="container-fluid mx-auto mt-3" style="width: 50%">
+                    <form method="POST" th:object="${user}" th:action="@{/register}">
+
+                        <input type="hidden" th:field="*{id}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="name" th:field="*{nome}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" th:field="*{username}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" th:field="*{password}">
+                        </div>
+
+                        <button type="submit" class="btn btn-dark btn-block mb-4">Register</button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</body>
+
+</html>

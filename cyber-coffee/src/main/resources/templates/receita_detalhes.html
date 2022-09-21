@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <section class="layout-content" layout:fragment="corpo">
+
+        <div class="container-buttons">
+
+            <div class="text-center">
+
+                <div class="container mx-auto mt-3">
+
+                    <div id="card-details" th:object="${receita}">
+                        <div style="text-align: justify;">
+                            <div class="card-body">
+                                <h2 style="text-align: center;" class="card-title" th:text="*{nome}">Card title</h2>
+                            </div>
+                            <img th:src="@{'/imgs/' + *{imagem}}" class="card-img-top" alt="Foto da Receita">
+                            <div id="pad">
+                                <div>
+                                    <div>
+                                        <h3>Tempo de Preparo:</h3>
+                                        <h3 th:text="*{tempoPreparo}"></h3>
+                                    </div>
+                                </div>
+                                <div style="width: 50%;">
+                                    <h6 th:text="*{modoPreparo}"></h6>
+                                </div>
+                                <div>
+                                    <h3>Rendimento:</h3>
+                                    <h4 th:text="*{rendimento}"></h4>
+                                </div>
+                                <h3>Ingredientes:</h3>
+                                <div th:each="item : *{elementosReceita}">
+                                    <h3 th:text="${item.quantidade}"></h3>
+                                    <td th:text="${item.unidadeMedida}"></td>
+                                    <td th:text="${item.ingrediente}"></td>
+                                </div>
+                            </div>
+                        </div>
+                        <a type="button" th:href="@{/}" class="btn btn-dark">Retornar</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</body>
+
+</html>

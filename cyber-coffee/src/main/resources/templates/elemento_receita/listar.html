@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+
+    <div layout:fragment="corpo">
+
+        <div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+
+        <div class="card mb-3">
+
+            <div class="card-body">
+                <form method="GET">
+
+                </form>
+            </div>
+
+        </div>
+
+        <div class="card mb-3 text-center">
+            <a class="btn btn-primary btn-sm" th:href="@{'/elemento_receita/editar/'+ ${receita.id}}">Adicionar Ingrediente</a>
+        </div>
+        <div th:if="${not #lists.isEmpty(lista)}">
+            <table class="table table-striped mb-3">
+                <caption hidden> Elementos da Receita</caption>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Quantidade</th>
+                        <th>Unidade de Medida</th>
+                        <th>Ingrediente</th>                       
+                        <th>Opções</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="item : ${lista}">
+
+                        <td th:text="${item.id}"></td>
+                        <td th:text="${item.quantidade}"></td>                        
+                        <td th:text="${item.unidadeMedida}"></td>                        
+                        <td th:text="${item.ingrediente}"></td>                        
+                        <td>
+                            <a class="btn btn-primary btn-sm" th:href="@{/elemento_receita/excluir/(id=${item.id})}"
+                            onclick="return confirm('Você realmente deseja excluir esse ingrediente da receita?')">Excluir</a>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

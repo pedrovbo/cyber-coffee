@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <section class="layout-content" layout:fragment="corpo">
+
+        <div class="container-buttons">
+
+            <div class="text-center">
+
+                <div class="container-fluid mx-auto mt-3" style="width: 50%">
+
+
+                    <form th:action="@{/login}" method="post">
+
+                        <div class="mb-3">
+                            <label class="form-label" for="login">Login</label>
+                            <input name="username" type="text" id="login" class="form-control"
+                                placeholder="Four Letters">
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Password</label>
+                            <input name="password" type="password" id="password" class="form-control"
+                                placeholder="Password">
+
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col d-flex justify-content-center">
+                                
+                            </div>
+
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-dark btn-block mb-4">Sign in</button>
+                            <a th:href="@{/register}" type="button" class="btn btn-dark btn-block mb-4">Sign up</a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</body>
+
+</html>
